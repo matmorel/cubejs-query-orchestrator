@@ -6,9 +6,11 @@ module.exports = function createRedisClient(url) {
       return new Promise((resolve, reject) => {
           // rely on scope
           this.exec(function (err, res) {
-              console.log(err, res)
               if (err) return reject(err);
-              return resolve(res.map((nestArr) => nestArr[1]));
+              if (res) {
+                return resolve(res.map((nestArr) => nestArr[1]))
+              }
+              return resolve(res);
           })
       })
   };
